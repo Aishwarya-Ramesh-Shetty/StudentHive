@@ -34,4 +34,26 @@ const deleteProperty = async(req,res)=>{
     });
 }
 
-module.exports = {createProperty,deleteProperty};
+
+const getProperties = async(req,res)=>{
+    const {location,maxPrice} = req.query;
+
+    let filter = {};
+
+    if(location){
+        filter.location = location;
+    }
+
+    if(maxPrice){
+        filter.price = {$lte : Number(maxPrice)};
+    }
+
+    const properties = await Property.find(filter).populate(
+        'owner',
+        'name email'
+    );
+
+    res.json(properties);
+}
+
+module.exports = {createProperty,deleteProperty,getProperties};
