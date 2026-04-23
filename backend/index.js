@@ -1,10 +1,11 @@
 const express = require('express')
 const app = express();
 const dotenv = require('dotenv');
-const connectDB = require('./config/db')
+const connectDB = require('./config/db');
 dotenv.config();
 connectDB();
-const userRoute = require('./routes/userRoute')
+const userRoute = require('./routes/userRoute');
+const propertyRoute = require('./routes/propertyRoute');
 
 app.use(express.json())
 
@@ -13,6 +14,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/api/users',userRoute);
+app.use('/api/property',propertyRoute);
 
 
 app.listen(5000,()=>{
