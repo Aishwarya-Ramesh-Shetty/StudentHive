@@ -56,4 +56,25 @@ const getProperties = async(req,res)=>{
     res.json(properties);
 }
 
-module.exports = {createProperty,deleteProperty,getProperties};
+const updateProperty = async(req,res)=>{
+    const property = await Property.findById(req.params.id);
+    if(!property){
+        return res.status(400).json({message:"Property does not exists"});
+    }
+
+    if(property.owner.toString()!== req.user._id.toString()){
+        return res.status(400).json("User cannot delete this property");
+    }
+
+     const {title,price,description,location} = req.body;
+
+     property.title = title || property.title;
+     property.price = price || property.price;
+     property.description = description || property.description;
+     property.location = location || property.location;
+
+     const updatedProperty = await property.save();
+     res.json(updatedProperty);
+}
+
+module.exports = {createProperty,deleteProperty,getProperties,updateProperty};
