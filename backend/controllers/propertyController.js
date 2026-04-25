@@ -36,22 +36,27 @@ const deleteProperty = async(req,res)=>{
 
 
 const getProperties = async(req,res)=>{
-    const {location,maxPrice} = req.query;
+    const {location,maxPrice,page=1,limit=5} = req.query;
 
     let filter = {};
 
     if(location){
-        filter.location = location;
+        filter.location = {
+            $regex : location,
+            $options:i
+        };
     }
 
     if(maxPrice){
         filter.price = {$lte : Number(maxPrice)};
     }
 
+    const skip = (Number(page)-1)*Number(limit);
+
     const properties = await Property.find(filter).populate(
         'owner',
         'name email'
-    );
+    ).skip(skip).limit(Number(limit));
 
     res.json(properties);
 }
