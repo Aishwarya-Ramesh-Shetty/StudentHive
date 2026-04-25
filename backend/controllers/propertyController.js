@@ -36,9 +36,10 @@ const deleteProperty = async(req,res)=>{
 
 
 const getProperties = async(req,res)=>{
-    const {location,maxPrice,page=1,limit=5} = req.query;
+    const {location,maxPrice,page=1,limit=5,sort} = req.query;
 
     let filter = {};
+    let sortOption = {};
 
     if(location){
         filter.location = {
@@ -51,14 +52,35 @@ const getProperties = async(req,res)=>{
         filter.price = {$lte : Number(maxPrice)};
     }
 
+    if(sort == 'latest'){
+        sortOption = {createdAt:-1};
+    }
+
+    if(sort == "price_low"){
+        sortOption = {price:1};
+    }
+
+    if(sort == "price_high"){
+        sortOption = {price:-1};
+    }
+
     const skip = (Number(page)-1)*Number(limit);
+
+    const totalProperties = await Property.countDocuments(filter);
+    const totalPages = Math.ceil(totalProperties/Number(limit));
 
     const properties = await Property.find(filter).populate(
         'owner',
         'name email'
-    ).skip(skip).limit(Number(limit));
+    ).sort(sortOption).skip(skip).limit(Number(limit));
 
-    res.json(properties);
+    res.json({
+        page:Number(page),
+        limit:Number(limit),
+        totalProperties,
+        totalPages,
+        properties
+    });
 }
 
 const updateProperty = async(req,res)=>{
