@@ -1,7 +1,8 @@
-const Property = require('../models/Property')
+const Property = require('../models/Property');
+const asyncHandler = require('express-async-handler');
 
 
-const createProperty = async(req,res)=>{
+const createProperty =asyncHandler( async(req,res)=>{
     const {title,price,description,location} = req.body;
 
     const property = await Property.create({
@@ -13,7 +14,7 @@ const createProperty = async(req,res)=>{
     })
 
     return res.status(201).json(property);
-};
+});
 
 const deleteProperty = async(req,res)=>{
     const property = await Property.findById(req.params.id);

@@ -6,7 +6,7 @@ dotenv.config();
 connectDB();
 const userRoute = require('./routes/userRoute');
 const propertyRoute = require('./routes/propertyRoute');
-
+const {notFound,errorHandler} = require('./middleware/errorMiddleware');
 app.use(express.json())
 
 app.get('/',(req,res)=>{
@@ -16,6 +16,8 @@ app.get('/',(req,res)=>{
 app.use('/api/users',userRoute);
 app.use('/api/property',propertyRoute);
 
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(5000,()=>{
     console.log(`Server listening on PORT 5000`)
