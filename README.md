@@ -1,6 +1,6 @@
 # StudentHive 🏠🎓
 
-StudentHive is a student rental web application designed to help students find safe, secure, and affordable apartments, PGs, and rental rooms based on their preferred location. The platform connects property owners with students by allowing owners to list their properties, while students can search and view accommodations according to their needs and budget.
+StudentHive is a student rental web application designed to help students find safe, secure, and affordable apartments, PGs, and rental rooms based on their preferred location. The platform connects property owners with students by allowing owners to list their properties, while students can search, filter, and view accommodations according to their needs and budget.
 
 This project is currently under development and focuses on simplifying the rental process for students, especially those coming from different cities for education.
 
@@ -19,6 +19,8 @@ This project is currently under development and focuses on simplifying the renta
 - Students can:
   - View available properties
   - Search properties based on location
+  - Filter properties by location and price
+- Pagination implemented for efficient property listing
 - Protected Routes using Middleware
 - MongoDB Database Integration
 
