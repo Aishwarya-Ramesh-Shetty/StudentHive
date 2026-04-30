@@ -14,6 +14,15 @@ const userSchema = mongoose.Schema({
         type:String,
         required:true,
         unique:true
+    },
+    role:{
+        type:String,
+        enum:['student', 'owner', 'admin'],
+        default:'student'
+    },
+    favorites:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Property'
     }
 },{timestamps:true});
 

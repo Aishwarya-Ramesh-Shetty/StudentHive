@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 
 const registerUser = async(req,res)=>{
-    const {name,email,password} = req.body;
+    const {name,email,password,role} = req.body;
     try{
 
         const userExists = await User.findOne({email});
@@ -17,12 +17,14 @@ const registerUser = async(req,res)=>{
         const user = await User.create({
             name,
             email,
-            password:hashedPassword
+            password:hashedPassword,
+            role
         })
         res.status(201).json({
             _id:user._id,
             name:user.name,
-            email:user.email
+            email:user.email,
+            role:user.role
         });
     }
     catch(error){
@@ -59,4 +61,27 @@ const loginUser = async(req,res)=>{
     })
 }
 
-module.exports = {registerUser,loginUser};
+
+const addToFavourites = async(req,res)=>{
+    const user = await User.findById(req.user._id);
+    const propertyId = req.params.propertyId;
+
+    await User.findByIdAndUpdate(req.user._id,{
+        $addToSet:{favourites:propertyId}
+    })
+
+    res.json({message:"Property added to favorites"});
+}
+
+const removeFromFavorites = async(req,res)=>{
+    const user = await User.findById(req.user._id);
+    const propertyId = req.params.propertyId;
+
+    await User.findByIdAndUpdate(req.user._id,{
+        $pull:{favourites:propertyId}
+    })
+
+    res.json({message:"Property removed from favorites"});
+}
+
+module.exports = {registerUser,loginUser,addToFavourites,removeFromFavorites};
