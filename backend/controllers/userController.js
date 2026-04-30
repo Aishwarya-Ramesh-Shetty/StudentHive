@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 
 
 const registerUser = async(req,res)=>{
@@ -65,9 +66,11 @@ const loginUser = async(req,res)=>{
 const addToFavourites = async(req,res)=>{
     const user = await User.findById(req.user._id);
     const propertyId = req.params.propertyId;
-
+    if(!mongoose.Types.ObjectId.isValid(propertyId)){
+        return res.status(400).json({message:"Invalid property id"});
+    }
     await User.findByIdAndUpdate(req.user._id,{
-        $addToSet:{favourites:propertyId}
+        $addToSet:{favorites:propertyId}
     })
 
     res.json({message:"Property added to favorites"});
@@ -77,11 +80,21 @@ const removeFromFavorites = async(req,res)=>{
     const user = await User.findById(req.user._id);
     const propertyId = req.params.propertyId;
 
+    if(!mongoose.Types.ObjectId.isValid(propertyId)){
+        return res.status(400).json({message:"Invalid property id"});
+    }
+
     await User.findByIdAndUpdate(req.user._id,{
-        $pull:{favourites:propertyId}
+        $pull:{favorites:propertyId}
     })
 
     res.json({message:"Property removed from favorites"});
 }
 
-module.exports = {registerUser,loginUser,addToFavourites,removeFromFavorites};
+const getFavourites = async(req,res)=>{
+        const user = await User.findById(req.user._id).populate('favorites');
+        console.log(user);
+        res.json(user.favorites);
+}
+
+module.exports = {registerUser,loginUser,addToFavourites,removeFromFavorites,getFavourites};
