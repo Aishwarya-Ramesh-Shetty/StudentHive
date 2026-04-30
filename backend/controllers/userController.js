@@ -63,7 +63,7 @@ const loginUser = async(req,res)=>{
 }
 
 
-const addToFavourites = async(req,res)=>{
+const addToFavorites = async(req,res)=>{
     const user = await User.findById(req.user._id);
     const propertyId = req.params.propertyId;
     if(!mongoose.Types.ObjectId.isValid(propertyId)){
@@ -91,10 +91,10 @@ const removeFromFavorites = async(req,res)=>{
     res.json({message:"Property removed from favorites"});
 }
 
-const getFavourites = async(req,res)=>{
+const getFavorites = async(req,res)=>{
         const user = await User.findById(req.user._id).populate('favorites');
         console.log(user);
         res.json(user.favorites);
 }
 
-module.exports = {registerUser,loginUser,addToFavourites,removeFromFavorites,getFavourites};
+module.exports = {registerUser,loginUser,addToFavorites,removeFromFavorites,getFavorites};

@@ -8,11 +8,15 @@ const userRoute = require('./routes/userRoute');
 const propertyRoute = require('./routes/propertyRoute');
 const {notFound,errorHandler} = require('./middleware/errorMiddleware');
 app.use(express.json())
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./config/swagger');
+
 
 app.get('/',(req,res)=>{
     res.send('Api running');
 })
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/users',userRoute);
 app.use('/api/property',propertyRoute);
 
