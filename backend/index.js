@@ -10,6 +10,7 @@ const {notFound,errorHandler} = require('./middleware/errorMiddleware');
 app.use(express.json())
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
+const bookingRoute = require('./routes/bookingRoute')
 
 
 app.get('/',(req,res)=>{
@@ -19,6 +20,7 @@ app.get('/',(req,res)=>{
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/users',userRoute);
 app.use('/api/property',propertyRoute);
+app.use('/api',bookingRoute)
 
 app.use(notFound);
 app.use(errorHandler);
