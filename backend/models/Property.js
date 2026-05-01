@@ -22,6 +22,10 @@ const propertySchema = mongoose.Schema({
         required:true,
         ref:'User'
     },
+    images:[{
+        url:String,
+        public_id:String
+    }]
 },{timestamps:true});
 
 

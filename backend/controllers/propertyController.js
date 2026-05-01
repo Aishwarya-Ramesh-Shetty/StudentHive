@@ -5,12 +5,18 @@ const asyncHandler = require('express-async-handler');
 const createProperty =asyncHandler( async(req,res)=>{
     const {title,price,description,location} = req.body;
 
+    const imageUrls = req.files ? req.files.map(file => ({
+        url:file.path,
+        public_id:file.filename
+    })) : [];
+
     const property = await Property.create({
         title,
         price,
         description,
         location,
-        owner : req.user._id
+        owner : req.user._id,
+        images:imageUrls
     })
 
     return res.status(201).json(property);
