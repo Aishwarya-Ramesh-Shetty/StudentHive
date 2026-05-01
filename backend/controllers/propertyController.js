@@ -35,6 +35,10 @@ const deleteProperty = async(req,res)=>{
         });
     }
 
+    for(const image of property.images){
+        await cloudinary.uploader.destroy(image.public_id);
+    }
+
     await property.deleteOne();
     res.json({
         message: "Property deleted successfully"
