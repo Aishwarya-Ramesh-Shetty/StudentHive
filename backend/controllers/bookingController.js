@@ -37,6 +37,10 @@ const approveBooking = async(req,res)=>{
         });
     }
 
+    if(booking.status !== "pending"){
+        return res.status(400).json({message:`Booking already ${booking.status}`});
+    }
+
     booking.status = "approved";
     await booking.save();
 
@@ -61,6 +65,11 @@ const rejectBooking = async(req,res)=>{
         });
     }
 
+
+    if(booking.status !== "pending"){
+        return res.status(400).json({message:`Booking already ${booking.status}`});
+    }
+
     booking.status = "rejected";
     await booking.save();
 
@@ -72,4 +81,20 @@ const rejectBooking = async(req,res)=>{
 
 }
 
-module.exports = {createBooking,approveBooking,rejectBooking};
+
+const getOwnerBookings = async(req,res)=>{
+    const bookings = Booking.find({
+        owner:req.user._id
+    })
+
+    if(!bookings){
+        return res.status(400).json({message:"No booking found"});
+    }
+
+
+    bookings.populate('user','name email').populate('property','title location price');
+    res.json(bookings);
+
+}
+
+module.exports = {createBooking,approveBooking,rejectBooking,getOwnerBookings};
