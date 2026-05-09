@@ -23,6 +23,7 @@ This project is currently under development and focuses on simplifying the renta
 - Pagination implemented for efficient property listing
 - Protected Routes using Middleware
 - MongoDB Database Integration
+- Used Cloudinary for Image Management 
 
 ---
 
@@ -41,6 +42,7 @@ This project is currently under development and focuses on simplifying the renta
 - mongoose
 - nodemon
 - dotenv
+- cloudinary
 
 ---
 
