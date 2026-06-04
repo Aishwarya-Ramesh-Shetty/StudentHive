@@ -20,7 +20,7 @@ app.get('/',(req,res)=>{
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api/users',userRoute);
 app.use('/api/property',propertyRoute);
-app.use('/api',bookingRoute)
+app.use('/api',bookingRoute);
 
 app.use(notFound);
 app.use(errorHandler);

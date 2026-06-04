@@ -5,7 +5,7 @@ const {protect} = require('../middleware/authMiddleware')
 const {createBooking,approveBooking,rejectBooking,getOwnerBookings} = require('../controllers/bookingController')
 
 router.post('/bookings',protect,createBooking);
-router.put('/:id/aprrove',protect,approveBooking);
+router.put('/:id/approve',protect,approveBooking);
 router.put('/:id/reject',protect,rejectBooking);
 router.get('/owner',protect,getOwnerBookings);
 

@@ -25,7 +25,7 @@ const createBooking = async(req,res)=>{
 
 
 const approveBooking = async(req,res)=>{
-    const booking = Booking.findById(req.params.id);
+    const booking = await Booking.findById(req.params.id);
 
     if(!booking){
         return res.status(404).json({message:"Booking not found"})
@@ -52,7 +52,7 @@ const approveBooking = async(req,res)=>{
 
 
 const rejectBooking = async(req,res)=>{
-    const booking = Booking.findById(req.params.id);
+    const booking = await Booking.findById(req.params.id);
 
     if(!booking){
         return res.status(404).json({message:"Booking not found"})
@@ -83,16 +83,16 @@ const rejectBooking = async(req,res)=>{
 
 
 const getOwnerBookings = async(req,res)=>{
-    const bookings = Booking.find({
+    const bookings = await Booking.find({
         owner:req.user._id
-    })
+    }).populate('user','name email').populate('property','title location price');
 
-    if(!bookings){
-        return res.status(400).json({message:"No booking found"});
+    if(bookings.length === 0){
+        return res.status(404).json({message:"No booking found"});
     }
 
 
-    bookings.populate('user','name email').populate('property','title location price');
+    
     res.json(bookings);
 
 }
