@@ -13,7 +13,7 @@ const bookingSchema = new mongoose.Schema({
     },
     owner:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Owner',
+        ref:'User',
         required:true
     },
     status:{

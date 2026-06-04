@@ -41,8 +41,29 @@ const approveBooking = async(req,res)=>{
         return res.status(400).json({message:`Booking already ${booking.status}`});
     }
 
+    const existingApprovedBooking = await Booking.findOne({
+        property:booking.property,
+        status:'approved'
+    })
+
+    if(existingApprovedBooking){
+        return res.status(400).json({message:"Property is already booked!"})
+    }
+
     booking.status = "approved";
     await booking.save();
+
+    await Booking.updateMany(
+        {
+            property:booking.property,
+            status:'pending',
+            _id:{$ne:booking._id}
+
+        },
+        {
+            status:'rejected'
+        }
+    )
 
     res.json({
         messgae:"Booking aprroved",

@@ -2,6 +2,7 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+const Booking = require('../models/Booking')
 
 
 const registerUser = async(req,res)=>{
@@ -97,4 +98,19 @@ const getFavorites = async(req,res)=>{
         res.json(user.favorites);
 }
 
-module.exports = {registerUser,loginUser,addToFavorites,removeFromFavorites,getFavorites};
+
+const getMyBooking = async(req,res) =>{
+    const bookings = await Booking.find({
+        user:req.user._id
+    })
+    .populate('property','title location price')
+    .populate('owner','name email')
+
+    if(bookings.length === 0){
+        return res.status(404).json({message:"No bookings found"})
+    }
+
+    res.json(bookings);
+}
+
+module.exports = {registerUser,loginUser,addToFavorites,removeFromFavorites,getFavorites,getMyBooking};

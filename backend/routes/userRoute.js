@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const {registerUser,loginUser,addToFavorites,removeFromFavorites,getFavorites} = require('../controllers/userController');
+const {registerUser,loginUser,addToFavorites,removeFromFavorites,getFavorites,getMyBooking} = require('../controllers/userController');
 const {protect} = require('../middleware/authMiddleware')
 
 
@@ -25,5 +25,7 @@ router.delete('/favorites/:propertyId',protect,removeFromFavorites);
 
 
 router.get('/favorites',protect,getFavorites);
+
+router.get('/my/bookings',protect,getMyBooking);
 
 module.exports = router;
