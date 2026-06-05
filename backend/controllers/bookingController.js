@@ -98,6 +98,10 @@ const rejectBooking = async(req,res)=>{
     booking.status = "rejected";
     await booking.save();
 
+    const property = await Property.findById(booking.property);
+    property.availabilityStatus = 'available';
+    await property.save();
+
     res.json({
         message: "Booking rejected",
         booking
