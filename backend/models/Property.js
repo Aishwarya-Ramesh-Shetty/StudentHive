@@ -25,7 +25,12 @@ const propertySchema = mongoose.Schema({
     images:[{
         url:String,
         public_id:String
-    }]
+    }],
+    availabilityStatus:{
+        type:String,
+        enum:['available','rented','pending'],
+        default:'available'
+    }
 },{timestamps:true});
 
 

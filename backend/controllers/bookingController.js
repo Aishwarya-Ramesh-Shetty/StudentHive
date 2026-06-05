@@ -65,6 +65,10 @@ const approveBooking = async(req,res)=>{
         }
     )
 
+    const property = await Property.findById(booking.property);
+    property.availabilityStatus = 'rented';
+    await property.save();
+
     res.json({
         messgae:"Booking aprroved",
         booking

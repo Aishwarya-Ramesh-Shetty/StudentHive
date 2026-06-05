@@ -29,7 +29,7 @@ const bookingSchema = new mongoose.Schema({
         type:Date,
         required:true
     }
-},{timeStamps:true})
+},{timestamps:true})
 
 const Booking = mongoose.model('Booking',bookingSchema);
 module.exports = Booking;
