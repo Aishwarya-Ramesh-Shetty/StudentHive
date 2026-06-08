@@ -11,7 +11,10 @@ app.use(express.json())
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger');
 const bookingRoute = require('./routes/bookingRoute')
+const cors = require('cors')
 
+
+app.use(cors({origin:'http://localhost:5173'}));
 
 app.get('/',(req,res)=>{
     res.send('Api running');
