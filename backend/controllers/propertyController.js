@@ -1,5 +1,6 @@
 const Property = require('../models/Property');
 const asyncHandler = require('express-async-handler');
+const mongoose = require('mongoose')
 
 
 const createProperty =asyncHandler( async(req,res)=>{
@@ -115,4 +116,24 @@ const updateProperty = async(req,res)=>{
      res.json(updatedProperty);
 }
 
-module.exports = {createProperty,deleteProperty,getProperties,updateProperty};
+
+const getPropertyById = async(req,res)=>{
+    const propertyId = req.params.id;
+
+    if(!mongoose.Types.ObjectId.isValid(propertyId)){
+        return res.status(400).json({
+            message:'Invalid Property Id'
+        })
+    }
+
+    const property = await Property.findById(propertyId).populate('owner','name email');
+
+    if(!property){
+        return res.status(404).json({message:"Property not found"});
+    }
+
+    res.json(property);
+
+}
+
+module.exports = {createProperty,deleteProperty,getProperties,updateProperty,getPropertyById};
