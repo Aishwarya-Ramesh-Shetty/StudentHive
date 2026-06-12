@@ -80,9 +80,10 @@ status automatically based on booking approval.
 ### Image Management
 
 * Cloudinary Integration
-* Image Upload Support
+* Image Multiple Upload Support
 * Property Image Storage
 * Public URL Generation
+* Users can see the images 
 
 ### API Documentation
 
