@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import {loginUser} from '../services/authService'
-
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 
 const Login = () => {
+    const { login } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         email: "",
         password: ""
@@ -21,9 +23,7 @@ const Login = () => {
 
         try {
             const data = await loginUser(formData);
-            console.log(data);
-            localStorage.setItem('userInfo', JSON.stringify(data));
-            console.log(localStorage.getItem("userInfo"));
+            login(data);
 
             alert("Login Successful");
         }

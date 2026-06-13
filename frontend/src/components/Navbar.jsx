@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom'
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
+    const { userInfo } = useContext(AuthContext);
+
+    console.log(userInfo);
     return (
         <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-slate-200">
             <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -14,13 +19,31 @@ const Navbar = () => {
                         Home
                     </Link>
 
-                    <Link to="/login" className="bg-[#c9184a] text-white px-5 py-2 rounded-xl hover:bg-[#6e9887]">
-                        Login
-                    </Link>
+                    {
+                        userInfo ? (
+                            <>
+                                <span className="font-semibold">
+                                    Welcome {userInfo.name}
+                                </span>
+                            </>
+                        ) : (
+                            <>
+                                <Link
+                                    to="/login"
+                                    className="bg-[#c9184a] text-white px-5 py-2 rounded-xl hover:bg-[#6e9887]"
+                                >
+                                    Login
+                                </Link>
 
-                    <Link to="/register" className="bg-[#c9184a] text-white px-5 py-2 rounded-xl hover:bg-[#6e9887]">
-                        Register
-                    </Link>
+                                <Link
+                                    to="/register"
+                                    className="bg-[#c9184a] text-white px-5 py-2 rounded-xl hover:bg-[#6e9887]"
+                                >
+                                    Register
+                                </Link>
+                            </>
+                        )
+                    }
 
                 </div>
 
