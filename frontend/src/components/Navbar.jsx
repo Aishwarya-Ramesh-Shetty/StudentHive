@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
-    const { userInfo } = useContext(AuthContext);
+    const { userInfo, logout } = useContext(AuthContext);
 
     console.log(userInfo);
     return (
@@ -13,7 +13,7 @@ const Navbar = () => {
                     Student<span className="text-[#c9184a]">Hive</span>
                 </h1>
 
-                <div className="space-x-6">
+                <div className="flex items-center gap-4">
 
                     <Link to="/" className="bg-[#c9184a] text-white px-5 py-2 rounded-xl hover:bg-[#6e9887]">
                         Home
@@ -22,9 +22,20 @@ const Navbar = () => {
                     {
                         userInfo ? (
                             <>
-                                <span className="font-semibold">
-                                    Welcome {userInfo.name}
-                                </span>
+                                <div className="flex items-center gap-4">
+
+                                    <span className="bg-[#c9184a] text-white px-5 py-2 rounded-xl hover:bg-[#6e9887]">
+                                        Welcome {userInfo.name}
+                                    </span>
+
+                                    <button
+                                        onClick={logout}
+                                        className="bg-[#c9184a] text-white px-5 py-2 rounded-xl hover:bg-[#9448bc]"
+                                    >
+                                        Logout
+                                    </button>
+
+                                </div>
                             </>
                         ) : (
                             <>
