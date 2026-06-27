@@ -1,203 +1,233 @@
-# StudentHive 🏠🎓
+# 🏠 StudentHive - Smart Student Rental Platform
 
-StudentHive is a full-stack student rental platform designed to help students discover safe, affordable, and verified rental accommodations such as apartments, PGs, and rental rooms. The platform connects property owners with students, allowing owners to list and manage properties while students can browse, save, and request bookings.
+> A full-stack MERN rental platform that connects students with verified property owners, featuring secure authentication, Cloudinary image uploads, booking management, favorites, owner approval workflow, and a modern React frontend.
 
-The project aims to simplify the rental process for students relocating to new cities for education.
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge\&logo=react)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge\&logo=node.js)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?style=for-the-badge\&logo=mongodb)
+![JWT](https://img.shields.io/badge/Auth-JWT-orange?style=for-the-badge)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge\&logo=tailwind-css)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-Image_Storage-3448C5?style=for-the-badge\&logo=cloudinary)
 
 ---
 
-## 🚀 Features
 
-### Authentication & Authorization
 
-* User Registration and Login
-* JWT-Based Authentication
+---
+
+# 📖 Overview
+
+StudentHive is a modern rental platform designed specifically for students looking for safe, affordable, and verified accommodations. Property owners can upload and manage rental listings while students can browse properties, save favorites, request bookings, and communicate with owners through an approval-based booking workflow.
+
+The platform focuses on simplifying student accommodation by providing secure authentication, image management, booking automation, and role-based access control.
+
+---
+
+# ✨ Features
+
+## 🔐 Authentication
+
+* Secure User Registration
+* User Login
+* JWT Authentication
 * Password Hashing using bcryptjs
-* Protected Routes using Middleware
-* Role-Based Access Control (Student, Owner, Admin)
+* Persistent Login Sessions
+* React Context API Authentication
+* Protected Routes
 
-### Property Management
+---
+
+## 🏡 Property Management
 
 Property Owners can:
 
-* Create Property Listings
-* Upload Property Images using Cloudinary
-* Update Their Own Properties
+* Add New Properties
+* Upload Property Images
+* Edit Property Details
 * Delete Their Own Properties
-* View Booking Requests for Their Properties
+* View Booking Requests
 
 Students can:
 
 * Browse Available Properties
-* Search Properties by Location
-* Filter Properties by Location and Price
-* View Detailed Property Information
-* Save Properties to Favorites
-* Request Property Bookings
+* View Property Details
+* Search Properties
+* Filter Properties
+* Save Favorite Properties
+* Request Bookings
 
-### Favorites System
+---
 
-* Add Properties to Favorites
-* Remove Properties from Favorites
-* View Saved Properties
+## 🖼️ Cloudinary Image Upload
 
-### Booking System
+* Multiple Property Images
+* Cloudinary Integration
+* Automatic Image Hosting
+* Secure Image Upload using Multer
+* Public URL Generation
+
+---
+
+## ❤️ Favorites System
 
 Students can:
 
-* Request Bookings for Properties
-* View Their Booking History
+* Save Properties
+* Remove Saved Properties
+* View Favorite Listings
+
+---
+
+## 📅 Booking Management
+
+Students can:
+
+* Request Property Booking
+* View Booking Status
+* Track Booking History
 
 Owners can:
 
-* View Booking Requests
+* View Incoming Booking Requests
 * Approve Bookings
 * Reject Bookings
 
-Booking Workflow:
+---
+
+## ⚙️ Intelligent Booking Workflow
 
 ```text
-Student Requests Booking
-          ↓
-      Pending
-          ↓
-Owner Approves / Rejects
-          ↓
-Approved Property Becomes Rented
-          ↓
-Remaining Pending Requests Auto-Rejected
+Student Requests Property
+          │
+          ▼
+   Booking Status
+      "Pending"
+          │
+          ▼
+ Owner Reviews Request
+     ↙            ↘
+Approve          Reject
+     │              │
+     ▼              ▼
+Property        Property
+Becomes         Remains
+Rented          Available
+     │
+     ▼
+Other Pending Requests
+Automatically Rejected
 ```
 
-### Property Availability Management
+---
 
-Each property maintains:
+## 🏠 Property Availability Management
+
+Every property automatically maintains its availability status:
 
 * Available
 * Rented
 
-status automatically based on booking approval.
-
-### Image Management
-
-* Cloudinary Integration
-* Image Multiple Upload Support
-* Property Image Storage
-* Public URL Generation
-* Users can see the images 
-
-### API Documentation
-
-* Swagger/OpenAPI Integration
-* Interactive API Testing
-* JWT Authorization Support inside Swagger
-
-### Property Listing Features
-
-* Pagination
-* Location Search
-* Price Filtering
-* Property Details Endpoint
+Availability updates automatically when bookings are approved or rejected.
 
 ---
 
-## 🖥️ Frontend Features
+## 📖 API Documentation
 
-Built using React + Vite + Tailwind CSS.
+* Swagger UI Integration
+* Interactive API Testing
+* JWT Authorization Support
+* RESTful API Architecture
 
-### Implemented
+---
 
-* Responsive Home Page
+## 🎨 Frontend
+
+Built using React and Tailwind CSS.
+
+Current Features:
+
+* Responsive Landing Page
+* Modern Navigation Bar
 * Property Listing Grid
 * Property Cards
 * Property Details Page
-* Dynamic Routing using React Router
-* Backend API Integration using Axios
-
-### In Progress
-
-* Authentication Pages
-* Favorites UI
-* Booking UI
-* Owner Dashboard
-* Student Dashboard
+* Authentication using Context API
+* Persistent Login Sessions
 
 ---
 
-## 🛠️ Tech Stack
+# 🏗️ Tech Stack
 
-### Frontend
+## Frontend
 
-* React.js
-* Vite
+* React (Vite)
 * Tailwind CSS
 * React Router DOM
 * Axios
+* React Context API
 
-### Backend
+---
+
+## Backend
 
 * Node.js
 * Express.js
-* MongoDB
-* Mongoose
+* REST APIs
+* Multer
+* Express Middleware
 
-### Authentication
+---
 
-* JWT (JSON Web Tokens)
+## Database
+
+* MongoDB Atlas
+* Mongoose ODM
+
+---
+
+## Authentication
+
+* JWT
 * bcryptjs
 
-### Cloud Services
+---
+
+## Cloud Services
 
 * Cloudinary
+* Multer Storage Cloudinary
 
-### API Documentation
+---
+
+## API Documentation
 
 * Swagger UI
 * Swagger JSDoc
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```text
 StudentHive/
-│
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
+│   │   ├── context/
 │   │   ├── pages/
 │   │   ├── services/
-│   │   ├── routes/
-│   │   ├── context/
+│   │   ├── assets/
 │   │   └── App.jsx
 │   │
 │   └── package.json
 │
 ├── backend/
-│   ├── controllers/
-│   │   ├── userController.js
-│   │   ├── propertyController.js
-│   │   └── bookingController.js
-│   │
-│   ├── models/
-│   │   ├── User.js
-│   │   ├── Property.js
-│   │   └── Booking.js
-│   │
-│   ├── routes/
-│   │   ├── userRoutes.js
-│   │   ├── propertyRoutes.js
-│   │   └── bookingRoutes.js
-│   │
-│   ├── middleware/
-│   │   ├── authMiddleware.js
-│   │   ├── roleMiddleware.js
-│   │   └── upload.js
-│   │
 │   ├── config/
-│   │   ├── db.js
-│   │   ├── cloudinary.js
-│   │   └── swagger.js
-│   │
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── uploads/
 │   ├── server.js
 │   └── package.json
 │
@@ -206,76 +236,166 @@ StudentHive/
 
 ---
 
-## 📡 Major API Endpoints
+# 🗄️ Database Design
 
-### Authentication
+The application currently uses three main collections.
 
-```http
-POST /api/users/register
-POST /api/users/login
-GET  /api/users/profile
-```
+## Users
 
-### Properties
+Stores:
 
-```http
-GET    /api/property
-GET    /api/property/:id
-POST   /api/property
-PUT    /api/property/:id
-DELETE /api/property/:id
-```
+* Name
+* Email
+* Password
+* Favorite Properties
 
-### Favorites
+---
 
-```http
-POST   /api/users/favourites/:propertyId
-DELETE /api/users/favourites/:propertyId
-GET    /api/users/favourites
-```
+## Properties
 
-### Bookings
+Stores:
 
-```http
-POST   /api/bookings
-GET    /api/bookings/my
-GET    /api/bookings/owner
-PUT    /api/bookings/:id/approve
-PUT    /api/bookings/:id/reject
+* Title
+* Description
+* Price
+* Location
+* Images
+* Owner
+* Availability Status
+
+---
+
+## Bookings
+
+Stores:
+
+* Student
+* Property
+* Owner
+* Booking Status
+* Start Date
+* End Date
+
+---
+
+# 🔄 Application Workflow
+
+1. User registers or logs into the platform.
+2. Property owners create rental listings.
+3. Images are uploaded to Cloudinary.
+4. Students browse available properties.
+5. Students save favorite properties.
+6. Students submit booking requests.
+7. Owners review booking requests.
+8. Owners approve or reject requests.
+9. Approved bookings automatically mark properties as rented.
+10. Remaining pending booking requests are automatically rejected.
+
+---
+
+# 🚀 Running Locally
+
+## Clone Repository
+
+```bash
+git clone https://github.com/Aishwarya-Ramesh-Shetty/StudentHive.git
+
+cd StudentHive
 ```
 
 ---
 
-## 🔒 Security Features
+## Backend
 
-* Password Hashing with bcryptjs
-* JWT Authentication
-* Protected API Routes
-* Role-Based Authorization
-* Owner-Specific Property Controls
-* Booking Ownership Validation
-* MongoDB ObjectId Validation
-* Duplicate Favorites Prevention
+```bash
+cd backend
 
----
+npm install
 
-## 🎯 Future Enhancements
-
-* Property Reviews & Ratings
-* Advanced Search Filters
-* Property Image Gallery
-* Email Notifications
-* Real-Time Chat Between Student & Owner
-* Payment Gateway Integration
-* Google Maps Integration
-* Admin Dashboard
-* Property Verification System
-* Booking Cancellation Workflow
+npm run dev
+```
 
 ---
 
-## 👩‍💻 Developer
+## Frontend
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+---
+
+# 🔑 Environment Variables
+
+## Backend (.env)
+
+```env
+PORT=5000
+
+MONGO_URI=
+
+JWT_SECRET=
+
+CLOUDINARY_CLOUD_NAME=
+
+CLOUDINARY_API_KEY=
+
+CLOUDINARY_API_SECRET=
+```
+
+---
+
+## Frontend (.env)
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+---
+
+# 📸 Screenshots
+
+* Home Page
+* Login
+* Register
+* Property Listings
+* Property Details
+* Owner Dashboard
+* Booking Requests
+* Favorites
+* Cloudinary Upload
+
+*(Add screenshots after frontend completion.)*
+
+---
+
+# 🔮 Future Enhancements
+
+* 💬 Real-time Chat between Student & Owner
+* 📍 Google Maps Integration
+* ⭐ Property Reviews & Ratings
+* 📧 Email Notifications
+* 💳 Online Rent Payment
+* 📅 Booking Calendar
+* 🔔 Real-time Notifications
+* 📱 Progressive Web App (PWA)
+* 📊 Admin Dashboard
+* 🤖 AI Property Recommendations
+* 📍 Nearby Colleges & Amenities
+* 🔍 Advanced Search & Filters
+
+---
+
+# 👩‍💻 Author
 
 **Aishwarya Shetty**
 
-StudentHive was developed as a full-stack MERN project focused on solving real-world accommodation challenges faced by students relocating for education.
+BE Computer Science & Engineering (Data Science)
+
+Full Stack MERN Developer | Building Real-World Web Applications
+
+If you found this project helpful, consider giving it a ⭐ on GitHub!
